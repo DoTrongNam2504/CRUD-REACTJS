@@ -8,17 +8,17 @@ function App() {
   return (
     <Router>
       <div className="main">
-        <h2 className="main-header">CURD REACT</h2>
+        <h2 className="main-header">CURD REACT APP</h2>
         <div>
-          <Route path="/create" component={props => <Create {...props} />} />
+          <Route path="/create" component={props => <Create {...props} />} /> 
         </div>
 
         <div>
-        <Route path="/read" component={props => <Read {...props} />} />
+        <Route path="/read" component={props => <Read {...props} />} /> 
         </div>
 
         <div>
-          <Route path="/update" component={props => <Update {...props} />} />
+          <Route path="/update" component={props => <Update {...props} />} /> 
         </div>
 
       </div>

@@ -61,3 +61,8 @@
   color: whitesmoke;
   flex-direction: column;
 }
+tr
+{
+  text-align: center;
+  line-height: 35px;
+}
