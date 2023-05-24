@@ -1,0 +1,16 @@
+{
+  "user": [
+    {
+      "firstName": "First Name 03",
+      "lastName": "Last Name 03",
+      "checkBox": true,
+      "id": 3
+    },
+    {
+      "firstName": "user 01",
+      "lastName": "last name 01",
+      "checkBox": false,
+      "id": 4
+    }
+  ]
+}
