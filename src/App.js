@@ -4,6 +4,7 @@ import UserList from './components/UserList';
 import { Route, Routes, useNavigate  } from "react-router-dom";
 import Create from './components/Create';
 import Update from './components/Update';
+import { v4 as uuid } from "uuid";
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -22,14 +23,15 @@ function App() {
   
 
 
-  function handleEditUser(user) {
+   function handleEditUser(data) {
     axios({
       method: "put",
-      url: `http://localhost:4000/user/${user.id}`,
+      url: `http://localhost:4000/user/${data.id}`,
       data: {
-        firstName: user.firstName,
-        lastName: user.lastName,
-        checkBox: user.checkBox,
+        userId:data.userId,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        checkBox: data.checkBox,
 
       },
       config: {
@@ -40,23 +42,25 @@ function App() {
       },
     })
     .then((response) => {
-      console.log(response);
+      console.log("Update data", response);
+    setUsers([...users.filter((item)=>item.id !== data.id), data]);
+
       navigate('/')
     })
       .catch((error) => {
         console.log("the error has occured: " + error);
       });
 
-    setUsers([...users, user]);
   }
 
-  function handleSubmit(user) {
+  async  function handleSubmit(user) {
     const data = {
+      userId: uuid(),
       firstName: user.firstName,
       lastName: user.lastName,
       checkBox: user.checkBox,
     };
-    axios({
+    await  axios({
       method: "post",
       url: "http://localhost:4000/user/",
       data: data,
@@ -68,14 +72,15 @@ function App() {
       },
     })
       .then((response) => {
-        console.log(response);
+        console.log("Add new data", response);
+        setUsers([...users, data]);
+        console.log("User now is : ", users)
         navigate('/')
       })
       .catch((error) => {
         console.log("the error has occured: " + error);
       });
 
-    setUsers([...users, data]);
   }
 
 
@@ -96,7 +101,7 @@ function App() {
 
       <Routes>
         <Route exact path='/' element={<UserList users={users}  deleteUser={deleteUser} />} />
-        <Route path="/create" exact  element={<Create  handleSubmit={handleSubmit}   />} />
+        <Route path="/create" exact  element={<Create  users={users}  handleSubmit={handleSubmit}   />} />
         <Route path="/update/:id" exact element={<Update  users={users}   handleEditUser={handleEditUser}  />} />
       </Routes>
 

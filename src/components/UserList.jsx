@@ -57,20 +57,20 @@ const UserList = (props) => {
 
             <Table.Body>
                 {searchInput.length > 1 ? (
-                    filterResult.map((data) => {
+                    filterResult.map((data, index) => {
                         return (
-                            <Table.Row key={data.id}>
+                            <Table.Row key={index}>
                                 <Table.Cell>{data.firstName} </Table.Cell>
                                 <Table.Cell>{data.lastName}</Table.Cell>
                                 <Table.Cell>{data.checkBox ? 'Checked' : 'Unchecked'}</Table.Cell>
                                 <Table.Cell>
-                                    <Link to={`/update/${data.id}`} >
+                                    <Link to={`/update/${data.userId}`} >
                                         <Button basic color='green' onClick={() => setDataUserEdit(data)}  >
                                             Edit
                                         </Button>
                                     </Link>
 
-                                    <Button basic color='red' onClick={() => props.deleteUser(data.id)} >
+                                    <Button basic color='red' onClick={() => props.deleteUser(data.userId)} >
                                         Delete
                                     </Button>
                                 </Table.Cell>
@@ -78,8 +78,8 @@ const UserList = (props) => {
                         )})
                         ): (
 
-                    props.users.map((data) => (
-                        <Table.Row key={data.id}>
+                    props.users.map((data,index) => (
+                        <Table.Row key={index}>
                             <Table.Cell>{data.firstName} </Table.Cell>
                             <Table.Cell>{data.lastName}</Table.Cell>
                             <Table.Cell>{data.checkBox ? 'Checked' : 'Unchecked'}</Table.Cell>

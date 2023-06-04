@@ -8,6 +8,7 @@ const Update = (props) => {
 
   function handleSubmitEdit(e) {
     e.preventDefault();
+    console.log("Show user now ",users);
     props.handleEditUser(users);
   }
 
